@@ -37,6 +37,13 @@ function fromAcorn(node) {
     };
   }
 
+  if (node.type === "UnaryExpression" && node.operator === "!") {
+    return {
+      type: "not",
+      argument: fromAcorn(node.argument)
+    };
+  }
+
   if (node.type === "Identifier") {
     return {
       type: "atom",
@@ -70,6 +77,14 @@ describe("builds a boolio tree from an acorn tree", () => {
       type: "and",
       left: { type: "atom", name: "a" },
       right: { type: "atom", name: "b" }
+    });
+  });
+
+  it("simple not expression", () => {
+    const tree = acorn.parse("!a");
+    expect(fromAcorn(tree)).toEqual({
+      type: "not",
+      argument: { type: "atom", name: "a" }
     });
   });
 

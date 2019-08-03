@@ -14,7 +14,11 @@ function evaluate(node, values) {
     return evaluate(node.left, values) || evaluate(node.right, values);
   }
 
-  throw new error(`Cannot evaluate type: ${node.type}`);
+  if (node.type === "not") {
+    return !evaluate(node.argument, values);
+  }
+
+  throw new Error(`Cannot evaluate type: ${node.type}`);
 }
 
 it.each([[T, T, T], [T, F, F], [F, T, F], [F, F, F]])(
@@ -40,6 +44,14 @@ it.each([[T, T, T], [T, F, T], [F, T, T], [F, F, F]])(
     expect(evaluate(ast, { a, b })).toEqual(result);
   }
 );
+
+it.each([[T, F], [F, T]])("given a = %s, not a === %s", (a, result) => {
+  const ast = {
+    type: "not",
+    argument: { type: "atom", name: "a" }
+  };
+  expect(evaluate(ast, { a })).toEqual(result);
+});
 
 it.each([
   [T, T, T, T],
