@@ -1,0 +1,17 @@
+{
+  "name": "bool.io",
+  "version": "1.0.0",
+  "description": "boolean expression assistant",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "acorn": "^6.2.1"
+  }
+}
