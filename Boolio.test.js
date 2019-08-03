@@ -95,3 +95,20 @@ it("finds the unique atoms in an expression", () => {
   const boolio = new Boolio("foo && bar(1) || (bar(2) && !foo)");
   expect(boolio.atoms()).toEqual(new Set(["foo", "bar(1)", "bar(2)"]));
 });
+
+it("generates a truth table for an expression", () => {
+  const boolio = new Boolio("foo && bar || foo && baz");
+  expect(boolio.truthTable()).toEqual({
+    atoms: ["foo", "bar", "baz"],
+    rows: [
+      [true, true, true, true],
+      [true, true, false, true],
+      [true, false, true, true],
+      [true, false, false, false],
+      [false, true, true, false],
+      [false, true, false, false],
+      [false, false, true, false],
+      [false, false, false, false]
+    ]
+  });
+});

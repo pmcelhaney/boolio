@@ -2,6 +2,17 @@ const ESParser = require("./ESParser");
 
 const parser = new ESParser();
 
+function booleanPairCombinations(n) {
+  if (n === 1) {
+    return [[true], [false]];
+  }
+
+  const combinationsMinusOne = booleanPairCombinations(n - 1);
+  return combinationsMinusOne
+    .map(rows => [true, ...rows])
+    .concat(combinationsMinusOne.map(rows => [false, ...rows]));
+}
+
 module.exports = class Boolio {
   constructor(expression) {
     this.ast = this.parse(expression);
@@ -55,5 +66,19 @@ module.exports = class Boolio {
     }
 
     return new Set(findAtoms(this.ast));
+  }
+
+  truthTable() {
+    const atoms = Array.from(this.atoms());
+    return {
+      atoms,
+      rows: booleanPairCombinations(atoms.length).map(row => {
+        const values = {};
+        atoms.forEach((atom, i) => {
+          values[atom] = row[i];
+        });
+        return [...row, this.evaluate(values)];
+      })
+    };
   }
 };
