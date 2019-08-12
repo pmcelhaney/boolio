@@ -4987,6 +4987,16 @@ var Boolio = (function () {
     )}`;
     }
 
+    if (node.type === "MemberExpression") {
+      return `${atomFromAcorn(node.object)}.${atomFromAcorn(node.property)}`;
+    }
+
+    if (node.type === "BinaryExpression") {
+      return `${atomFromAcorn(node.left)} ${node.operator} ${atomFromAcorn(
+      node.right
+    )}`;
+    }
+
     return `?${node.type}?`;
   }
 
@@ -5026,7 +5036,11 @@ var Boolio = (function () {
         };
       }
 
-      if (node.type === "CallExpression") {
+      if (
+        node.type === "CallExpression" ||
+        node.type === "BinaryExpression" ||
+        node.type === "MemberExpression"
+      ) {
         return {
           type: "atom",
           name: atomFromAcorn(node)

@@ -3,7 +3,7 @@ import commonjs from "rollup-plugin-commonjs";
 import nodeResolve from "rollup-plugin-node-resolve";
 
 export default {
-  input: "main.js",
+  input: "Boolio.js",
   output: {
     file: "browser.js",
     format: "iife",

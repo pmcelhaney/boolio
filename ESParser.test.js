@@ -84,4 +84,22 @@ describe("builds a boolio tree from a JS expression", () => {
       name: "foo(a && b)"
     });
   });
+
+  it("member and binary expressions", () => {
+    expect(
+      parse(
+        "wire.frequency.type !== 'OneTime' && (!wire.beneficiary.isInternational)"
+      )
+    ).toEqual({
+      type: "and",
+      left: { type: "atom", name: "wire.frequency.type !== 'OneTime'" },
+      right: {
+        type: "not",
+        argument: {
+          type: "atom",
+          name: "wire.beneficiary.isInternational"
+        }
+      }
+    });
+  });
 });
