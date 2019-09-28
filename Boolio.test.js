@@ -101,14 +101,28 @@ it("generates a truth table for an expression", () => {
   expect(boolio.truthTable()).toEqual({
     atoms: ["foo", "bar", "baz"],
     rows: [
-      [true, true, true, true],
-      [true, true, false, true],
-      [true, false, true, true],
-      [true, false, false, false],
-      [false, true, true, false],
-      [false, true, false, false],
-      [false, false, true, false],
-      [false, false, false, false]
+      [T, T, T, T],
+      [T, T, F, T],
+      [T, F, T, T],
+      [T, F, F, F],
+      [F, T, T, F],
+      [F, T, F, F],
+      [F, F, T, F],
+      [F, F, F, F]
     ]
   });
 });
+
+function essentialPrimeImplicants() {
+  return [];
+}
+
+// it("reduces prime implicants to essential prime implicants", () => {
+//   expect(
+//     essentialPrimeImplicants([
+//       { expression: [null, F, F, null], minTerms: [0, 1, 8, 9] },
+//       { expression: [null, F, null, T], minTerms: [0, 1, 3, 11] },
+//       { expression: [null, null, T, T], minTerms: [3, 7, 11, 15] }
+//     ])
+//   ).toEqual([[null, F, F, null], [null, null, T, T]]);
+// });
