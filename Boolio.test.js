@@ -120,9 +120,9 @@ function essentialPrimeImplicants() {
 // it("reduces prime implicants to essential prime implicants", () => {
 //   expect(
 //     essentialPrimeImplicants([
-//       { expression: [null, F, F, null], minTerms: [0, 1, 8, 9] },
-//       { expression: [null, F, null, T], minTerms: [0, 1, 3, 11] },
-//       { expression: [null, null, T, T], minTerms: [3, 7, 11, 15] }
-//     ])
+//       { term: [null, F, F, null], minTerms: [0, 1, 8, 9] },
+//       { term: [null, F, null, T], minTerms: [0, 1, 3, 11] },
+//       { term: [null, null, T, T], minTerms: [3, 7, 11, 15] }
+//     ], [0, 1, 3, 7, 8, 9, 11, 15])
 //   ).toEqual([[null, F, F, null], [null, null, T, T]]);
 // });
