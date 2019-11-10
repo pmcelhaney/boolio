@@ -33,15 +33,19 @@ module.exports = class ExpressionBuilder {
 
   mintermsFromTruthTable(truthTable) {
     return truthTable.rows
-      .filter(row => row.slice(-1))
-      .map(truthTableRowToMinterm);
+      .filter(row => row.slice(-1)[0])
+      .map(row => row.slice(0, -1));
   }
 
   primeImplicantsFromMinterms(minterms) {
-    return reducePrimeImplicantGroups(
+    return this.reducePrimeImplicantGroups(
       this.createPrimeImplicantGroups(minterms),
       []
     );
+  }
+
+  createPrimeImplicantGroups(minterms) {
+    return this.nonEmptySubsets(minterms);
   }
 
   combinePrimeImplicants(a, b) {
@@ -111,6 +115,7 @@ module.exports = class ExpressionBuilder {
       }
     }
 
+    console.log(groups);
     const irreduciblePrimeImplicants = [
       ...previousIrreduciblePrimeImplicants,
       ...groups.flat().filter(pi => !pi.used)
@@ -130,18 +135,18 @@ module.exports = class ExpressionBuilder {
 /*
 minterm = [ true, false, null, true]
 
-primeImplicant = { minterms: [...], used: true, combinedminterm: [true, null, null, true]}
+primeImplicant = { minterms: [...], used: true, combinedMinterm: [true, null, null, true]}
 
-pi = new PrimeImplicant(reducedminterm, minterms)
+pi = new PrimeImplicant(reducedMinterm, minterms)
 pi.combine(otherPi)
-   pi.combineminterm(mt);
+   pi.combinedMinterm(mt);
 pi.isUsed();
 pi.minterms();
 pi.toString() => "1_01"
 
 mt = new minterm([true, false, false, true])
 mt.combine(otherMt)
-mt.equals(otherminterm)
+mt.equals(otherMinterm)
 
 
 
