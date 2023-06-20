@@ -16,7 +16,7 @@
     "rollup-plugin-node-resolve": "^5.2.0"
   },
   "dependencies": {
-    "acorn": "^6.4.1",
+    "acorn": "^8.0.0",
     "table": "^5.4.5"
   }
 }
