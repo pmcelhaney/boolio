@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "acorn": "^6.4.1",
-    "table": "^5.4.5"
+    "table": "^6.0.0"
   }
 }
